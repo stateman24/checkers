@@ -11,6 +11,6 @@ class Setting:
             'red': (255, 0, 0),
             'green': (0, 255, 0)
         }
-        self.FPS = 60
+        self.FPS = 100
         self.padding = 20
         self.outline = 5

@@ -1,5 +1,6 @@
 import pygame
 from setting import Setting
+from player import Player
 from piece import Piece
 class Board:
     def __init__(self):
@@ -7,6 +8,8 @@ class Board:
         self.board = []
         self.green_piece = 12
         self.red_piece = 12
+        self.player1 = Player(self.setting.color['green'])
+        self.player2 = Player(self.setting.color['red'])
         self.create_board()
 
     def draw_cube(self, screen):
@@ -24,9 +27,13 @@ class Board:
             for col in range(self.setting.col):
                 if (col % 2) == ((row + 1) % 2):
                     if row < 3:
-                        self.board[row].append(Piece(row, col, self.setting.color['red']))
+                        piece = Piece(row, col, self.player1.color)
+                        self.player1.pieces.append(piece)
+                        self.board[row].append(piece)
                     elif row > 4:
-                        self.board[row].append(Piece(row, col, self.setting.color['green']))
+                        piece = Piece(row, col, self.player2.color)
+                        self.player2.pieces.append(piece)
+                        self.board[row].append(piece)
                     else:
                         self.board[row].append(0)
                 else:
@@ -44,10 +51,9 @@ class Board:
     def get_piece(self, row, col):
         return self.board[row][col]
 
-    def move_piece(self, piece, row, col):
-        self.board[row][col], self.board[piece.row][piece.col] = self.board[piece.row][piece.col], self.board[row][col]
-        piece.move(row, col)
 
+    def update_board(self):
+        pass
 
 
 
