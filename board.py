@@ -5,8 +5,8 @@ class Board:
     def __init__(self):
         self.setting = Setting()
         self.board = []
-
-
+        self.green_piece = 12
+        self.red_piece = 12
         self.create_board()
 
     def draw_cube(self, screen):
@@ -29,11 +29,25 @@ class Board:
                         self.board[row].append(Piece(row, col, self.setting.color['green']))
                     else:
                         self.board[row].append(0)
-        print(self.board)
+                else:
+                    self.board[row].append(0)
 
-    def draw_piece(self, screen):
+
+    def draw(self, screen):
+        self.draw_cube(screen)
         for row in range(self.setting.row):
-            for col in range(self.setting.col//2):
+            for col in range(self.setting.col):
                 piece = self.board[row][col]
                 if piece != 0:
                     piece.draw(screen)
+
+    def get_piece(self, row, col):
+        return self.board[row][col]
+
+    def move_piece(self, piece, row, col):
+        self.board[row][col], self.board[piece.row][piece.col] = self.board[piece.row][piece.col], self.board[row][col]
+        piece.move(row, col)
+
+
+
+
