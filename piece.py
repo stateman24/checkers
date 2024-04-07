@@ -7,17 +7,9 @@ class Piece:
         self.col = col
         self.color = color
         self.setting = Setting()
-        self.direction = 0
-        if self.color == "green":
-            self.direction -= 1
-        else:
-            self.direction += 1
-
         self.x = 0
         self.y = 0
         self.calc_pos()
-
-        self.selected = False
 
     def calc_pos(self):
         self.x = self.setting.boxsize * self.col + self.setting.boxsize // 2

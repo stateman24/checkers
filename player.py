@@ -6,7 +6,8 @@ class Player:
         self.num_of_pieces = len(self.pieces)
         self.setting = Setting()
         self.turn = turn
-    def move(self, piece):
+
+    def update_player_pieces(self):
         pass
 
     def switch(self):
