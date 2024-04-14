@@ -26,7 +26,9 @@ class Checkers:
             if event.type == pygame.QUIT:
                 sys.exit()
             if event.type == pygame.MOUSEBUTTONDOWN:
-                pass
+                pos = pygame.mouse.get_pos()
+                row, col = self.get_pos_from_mouse(pos)
+                self.game.select_piece(row, col)
 
     def _update_screen(self):
         self.screen.fill(self.bg_color)

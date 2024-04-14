@@ -9,6 +9,7 @@ class Piece:
         self.setting = Setting()
         self.x = 0
         self.y = 0
+        self.king = False
         self.calc_pos()
 
     def calc_pos(self):
