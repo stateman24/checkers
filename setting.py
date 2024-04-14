@@ -1,10 +1,12 @@
+import pygame
+
 class Setting:
     def __init__(self):
         self.screen_width = 800
         self.screen_height = 800
         self.row = 8
         self.col = 8
-        self.boxsize = self.screen_width // self.col
+        self.box_size = self.screen_width // self.col
         self.color = {
             'white': (255, 255, 255),
             'black': (0, 0, 0),
@@ -15,3 +17,4 @@ class Setting:
         self.FPS = 100
         self.padding = 20
         self.outline = 5
+        self.crown = pygame.transform.scale(pygame.image.load("assets/icon.png"), (44, 25))

@@ -60,7 +60,7 @@ class Game:
             row, col = move
             pygame.draw.circle(self.screen,
                                self.setting.color['blue'],
-                               (col * self.setting.boxsize + self.setting.boxsize//2, row * self.setting.boxsize + self.setting.boxsize//2),
+                               (col * self.setting.box_size + self.setting.box_size // 2, row * self.setting.box_size + self.setting.box_size // 2),
                                15)
 
     def change_player_turn(self):

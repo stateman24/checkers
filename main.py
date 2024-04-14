@@ -38,8 +38,8 @@ class Checkers:
 
     def get_pos_from_mouse(self, pos):
         x, y = pos
-        row = y // self.setting.boxsize
-        col = x // self.setting.boxsize
+        row = y // self.setting.box_size
+        col = x // self.setting.box_size
         return row, col
 
 
