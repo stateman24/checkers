@@ -51,6 +51,13 @@ class Board:
     def get_piece(self, row, col):
         return self.board[row][col]
 
+    def move(self, piece, row, col):
+        self.board[row][col], self.board[piece.row][piece.col] = self.board[piece.row][piece.col], self.board[row][col]
+        piece.move(row, col)
+        if piece.color == self.player1.color:
+            self.player1.update_player_pieces(piece, row, col)
+        else:
+            self.player2.update_player_pieces(piece, row, col)
 
     def update_board(self):
         pass

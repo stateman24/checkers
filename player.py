@@ -7,8 +7,11 @@ class Player:
         self.setting = Setting()
         self.turn = turn
 
-    def update_player_pieces(self):
-        pass
+    def update_player_pieces(self, piece, row, col):
+        for playerpiece in self.pieces:
+            if playerpiece.row == piece.row and playerpiece.col == piece.col:
+                playerpiece.row = row
+                playerpiece.col = col
 
     def switch(self):
         if self.turn:
