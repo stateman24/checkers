@@ -1,7 +1,7 @@
 import sys
 import pygame
 from setting import Setting
-from board import Board
+from game import Game
 
 
 class Checkers:
@@ -14,7 +14,7 @@ class Checkers:
         pygame.display.set_icon(self.icon)
         self.bg_color = self.setting.color['white']
         self.clock = pygame.time.Clock()
-        self.board = Board()
+        self.game = Game(self.screen)
 
     def run_game(self):
         while True:
@@ -26,14 +26,11 @@ class Checkers:
             if event.type == pygame.QUIT:
                 sys.exit()
             if event.type == pygame.MOUSEBUTTONDOWN:
-                pos = pygame.mouse.get_pos()
-                row, col = self.get_pos_from_mouse(pos)
-                piece = self.board.get_piece(row, col)
-                self.board.move(piece, 4, 3)
+                pass
 
     def _update_screen(self):
         self.screen.fill(self.bg_color)
-        self.board.draw(screen=self.screen)
+        self.game.update()
         self.clock.tick(self.setting.FPS)
         pygame.display.flip()
 
