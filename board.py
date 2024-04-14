@@ -62,5 +62,7 @@ class Board:
     def update_board(self):
         pass
 
+    def get_valid_moves(self):
+        pass
 
 

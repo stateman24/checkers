@@ -16,8 +16,6 @@ class Checkers:
         self.clock = pygame.time.Clock()
         self.board = Board()
 
-
-
     def run_game(self):
         while True:
             self._check_event()
@@ -31,8 +29,7 @@ class Checkers:
                 pos = pygame.mouse.get_pos()
                 row, col = self.get_pos_from_mouse(pos)
                 piece = self.board.get_piece(row, col)
-                self.board.move(piece, 4,3)
-
+                self.board.move(piece, 4, 3)
 
     def _update_screen(self):
         self.screen.fill(self.bg_color)
