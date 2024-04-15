@@ -56,13 +56,13 @@ class Board:
         self.board[row][col], self.board[piece.row][piece.col] = self.board[piece.row][piece.col], self.board[row][col]
         piece.move(row, col)
         if piece.color == self.green_player.color:
-            self.check_move_to_make_king(piece, row)
+            self.check_move_to_make_king(piece)
             self.green_player.update_player_pieces(piece, row, col)
         else:
-            self.check_move_to_make_king(piece, row)
+            self.check_move_to_make_king(piece)
             self.red_player.update_player_pieces(piece, row, col)
 
-    def check_move_to_make_king(self, piece, row):
+    def check_move_to_make_king(self, piece):
         if piece.color == self.green_player.color:
             if piece.row == 0:
                 piece.make_king()
@@ -158,7 +158,10 @@ class Board:
     def _traverse_left_king(self, start, stop, step, color, left, skipped=[]):
         moves = {}
         last = []
+        piece_hit = 0
         for r in range(start, stop, step):
+            if piece_hit >= 2:
+                break
             if left < 0:
                 break
             current = self.board[r][left]
@@ -180,6 +183,7 @@ class Board:
                 break
             else:
                 last = [current]
+                piece_hit += 1
             left -= 1
         return moves
 
@@ -190,7 +194,7 @@ class Board:
         for r in range(start, stop, step):
             if piece_hit >= 2:
                 break
-            elif right >= self.setting.col:
+            if right >= self.setting.col:
                 break
             current = self.board[r][right]
             if current == 0:
