@@ -1,34 +1,20 @@
-import pygame
-from board import Board
 from setting import Setting
-
 class Player:
-    def __init__(self, color, turn=False):
+    def __init__(self, color):
         self.color = color
-        self.num_of_pieces = None
-        self.board = Board()
+        self.pieces = []
+        self.king_pieces = 0
+        self.num_of_pieces = len(self.pieces)
         self.setting = Setting()
-        self.turn = turn
-    def get_pieces(self, color):
-        if color == self.setting.color['green']:
-            self.num_of_pieces = self.board.green_piece
-        else:
-            self.num_of_pieces = self.board.red_piece
 
-    def select_piece(self, row, col):
-        piece = self.board.get_piece(row, col)
-        try:
-            if piece.color == self.color:
-                piece.selected = True
-                return piece
-        except AttributeError:
-            return None
-
-    def switch(self):
-        if self.turn:
-            self.turn = False
-        else:
-            self.turn = True
+    def update_player_pieces(self, piece, row, col):
+        for player_piece in self.pieces:
+            if player_piece.row == piece.row and player_piece.col == piece.col:
+                player_piece.row = row
+                player_piece.col = col
+        for king_piece in self.pieces:
+            if king_piece.king:
+                self.king_pieces += 1
 
     def __str__(self):
-        return f"Player {self.color} {self.turn}"
+        return f"Player {self.color}"
