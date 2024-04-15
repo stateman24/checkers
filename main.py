@@ -1,8 +1,7 @@
 import sys
 import pygame
 from setting import Setting
-from board import Board
-from player import Player
+from game import Game
 
 
 class Checkers:
@@ -15,27 +14,10 @@ class Checkers:
         pygame.display.set_icon(self.icon)
         self.bg_color = self.setting.color['white']
         self.clock = pygame.time.Clock()
-        self.board = Board()
-        self.player1 = Player(self.setting.color['red'], turn=True)
-        self.player2 = Player(self.setting.color['green'])
-        self.currentplayer = None
-
-    def playermanger(self, player1, player2):
-        player1 = self.player1
-        player2 = self.player2
-        if player1.turn:
-            self.currentplayer = player1
-            player1.switch()
-            player2.switch()
-        elif player2.turn:
-            self.currentplayer = player2
-            player2.switch()
-            player1.switch()
-        print(self.currentplayer)
+        self.game = Game(self.screen)
 
     def run_game(self):
         while True:
-            self.playermanger(player1=self.player1, player2=self.player2)
             self._check_event()
             self._update_screen()
 
@@ -43,20 +25,21 @@ class Checkers:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 sys.exit()
-            elif event.type == pygame.MOUSEBUTTONDOWN:
-                pass
-
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                pos = pygame.mouse.get_pos()
+                row, col = self.get_pos_from_mouse(pos)
+                self.game.select_piece(row, col)
 
     def _update_screen(self):
         self.screen.fill(self.bg_color)
-        self.board.draw(screen=self.screen)
+        self.game.update()
         self.clock.tick(self.setting.FPS)
         pygame.display.flip()
 
     def get_pos_from_mouse(self, pos):
         x, y = pos
-        row = y // self.setting.boxsize
-        col = x // self.setting.boxsize
+        row = y // self.setting.box_size
+        col = x // self.setting.box_size
         return row, col
 
 

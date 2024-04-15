@@ -7,21 +7,15 @@ class Piece:
         self.col = col
         self.color = color
         self.setting = Setting()
-        self.direction = 0
-        if self.color == "green":
-            self.direction -= 1
-        else:
-            self.direction += 1
-
         self.x = 0
         self.y = 0
+        self.king = False
+        self.crown = self.setting.crown
         self.calc_pos()
 
-        self.selected = False
-
     def calc_pos(self):
-        self.x = self.setting.boxsize * self.col + self.setting.boxsize // 2
-        self.y = self.setting.boxsize * self.row + self.setting.boxsize // 2
+        self.x = self.setting.box_size * self.col + self.setting.box_size // 2
+        self.y = self.setting.box_size * self.row + self.setting.box_size // 2
 
     def move(self, row, col):
         self.row = row
@@ -29,9 +23,13 @@ class Piece:
         self.calc_pos()
 
     def draw(self, screen):
-        radius = self.setting.boxsize // 2 - self.setting.padding
+        radius = self.setting.box_size // 2 - self.setting.padding
         pygame.draw.circle(screen, self.color, center=(self.x, self.y), radius=radius)
+        if self.king:
+            screen.blit(self.crown, (self.x - self.crown.get_width()//2, self.y - self.crown.get_height()//2))
 
+    def make_king(self):
+        self.king = True
 
     def __repr__(self):
         return f"Piece({self.color}, {self.row}, {self.col})"
